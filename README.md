@@ -2,14 +2,14 @@
 
 <div align="center">
 
-[![Hugging Face Collections](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collections-yellow)](https://huggingface.co/collections/LazarusNLP/indonesian-t5-language-models-65c1b9a0f6342b3eb3d6d450)
+<a href="https://huggingface.co/collections/LazarusNLP/indonesian-t5-language-models-65c1b9a0f6342b3eb3d6d450"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Collections-yellow"></img></a>
 
 </div>
 
 This project focuses on pre-training a [T5](https://arxiv.org/abs/1910.10683) (Text-to-Text Transfer Transformer) model specifically for the Indonesian language, using [nanoT5](https://github.com/PiotrNawrot/nanoT5) as its training framework. Our aim is to provide fully open-source, budget-constrained, sequence-to-sequence language models for Indonesia that are on-par with state-of-the-art models!
 
 <p align="center">
-    <img src="assets/logo.png" alt="logo" width="400"/>
+    <img src="https://raw.githubusercontent.com/LazarusNLP/IndoT5/main/assets/logo.png" alt="logo" width="400"/>
 </p>
 
 ## Pre-trained Models
@@ -104,8 +104,8 @@ This growing list of ideas stem from a fruitful discussion [here](https://github
 
 <details>
   <summary>Training Losses</summary>
-  
-  ![](assets/training_loss.png)
+
+  <img src="https://raw.githubusercontent.com/LazarusNLP/IndoT5/main/assets/training_loss.png"/>
 </details>
 
 <!-- TODO: ## Fine-tune T5 -->
