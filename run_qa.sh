@@ -1,0 +1,19 @@
+python scripts/run_qa.py \
+    --model-checkpoint LazarusNLP/IndoNanoT5-base \
+    --dataset-name LazarusNLP/indonlg \
+    --dataset-config question_answering \
+    --context-column-name context \
+    --question-column-name input \
+    --answer-column-name references \
+    --id-column-name gem_id \
+    --input-max-length 512 \
+    --target-max-length 512 \
+    --num-beams 5 \
+    --output-dir outputs/indo-nanot5-tydiqa \
+    --num-train-epochs 50 \
+    --optim adamw_torch_fused \
+    --learning-rate 1e-5 \
+    --weight-decay 0.01 \
+    --per-device-train-batch-size 8 \
+    --per-device-eval-batch-size 16 \
+    --hub-model-id LazarusNLP/IndoNanoT5-base-TyDiQA

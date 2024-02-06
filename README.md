@@ -38,7 +38,17 @@ We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which c
 
 <!-- TODO: Liputan6 -->
 
-<!-- TODO: TyDiQA -->
+### TyDiQA
+
+| Model                                                                           | #params |    EM     |    F1     |
+| ------------------------------------------------------------------------------- | :-----: | :-------: | :-------: |
+| Scratch $^\dagger$                                                              |  132M   |   21.40   |   29.77   |
+| mBART Large $^\dagger$                                                          |  610M   | **62.69** | **76.41** |
+| mT5 Small $^\dagger$                                                            |  300M   |   35.67   |   51.90   |
+| IndoBART $^\dagger$                                                             |  132M   |   57.31   |   69.59   |
+| IndoGPT $^\dagger$                                                              |  117M   |   50.18   |   63.97   |
+| *Our work*                                                                      |
+| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   58.94   |   72.19   |
 
 <!-- TODO: XPersona -->
 
@@ -140,7 +150,33 @@ python scripts/run_summarization.py \
 
 IndoNLG summarization recipes are provided [here](https://github.com/LazarusNLP/IndoT5/blob/main/run_summarization.sh).
 
-<!-- TODO: ### Question-Answering -->
+### Question-Answering
+
+To fine-tune for question-answering, run the following command and modify accordingly:
+
+```sh
+python scripts/run_qa.py \
+    --model-checkpoint LazarusNLP/IndoNanoT5-base \
+    --dataset-name LazarusNLP/indonlg \
+    --dataset-config question_answering \
+    --context-column-name context \ # context/passage column name
+    --question-column-name input \ # question column name
+    --answer-column-name references \ # answer column name, must be list
+    --id-column-name gem_id \ # question-answer pair id
+    --input-max-length 512 \
+    --target-max-length 512 \
+    --num-beams 5 \
+    --output-dir outputs/indo-nanot5-tydiqa \
+    --num-train-epochs 50 \
+    --optim adamw_torch_fused \
+    --learning-rate 1e-5 \
+    --weight-decay 0.01 \
+    --per-device-train-batch-size 8 \
+    --per-device-eval-batch-size 16 \
+    --hub-model-id LazarusNLP/IndoNanoT5-base-TyDiQA
+```
+
+IndoNLG question-answering recipe is provided [here](https://github.com/LazarusNLP/IndoT5/blob/main/run_qa.sh).
 
 <!-- TODO: ### Chit-chat -->
 
