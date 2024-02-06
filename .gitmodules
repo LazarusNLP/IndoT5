@@ -1,0 +1,4 @@
+[submodule "nanoT5"]
+	path = nanoT5
+	url = https://github.com/LazarusNLP/nanoT5.git
+	branch = ind
