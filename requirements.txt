@@ -3,3 +3,5 @@ datasets
 tokenizers
 sentencepiece
 transformers
+rouge_score
+evaluate

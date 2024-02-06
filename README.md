@@ -28,11 +28,11 @@ We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which c
 
 | Model                                                                           | #params |    R1     |    R2     |    RL     |
 | ------------------------------------------------------------------------------- | :-----: | :-------: | :-------: | :-------: |
-| Scratch $^\dagger$                                                                         |  132M   |   70.52   |   65.43   |   68.35   |
-| mBART Large $^\dagger$                                                                    |  610M   |   74.65   |   70.43   |   72.54   |
-| mT5 Small $^\dagger$                                                                       |  300M   |   74.04   |   69.64   |   71.89   |
-| IndoBART $^\dagger$                                                                        |  132M   |   70.67   |   65.59   |   68.18   |
-| IndoGPT $^\dagger$                                                                         |  117M   |   74.49   |   70.34   |   72.46   |
+| Scratch $^\dagger$                                                              |  132M   |   70.52   |   65.43   |   68.35   |
+| mBART Large $^\dagger$                                                          |  610M   |   74.65   |   70.43   |   72.54   |
+| mT5 Small $^\dagger$                                                            |  300M   |   74.04   |   69.64   |   71.89   |
+| IndoBART $^\dagger$                                                             |  132M   |   70.67   |   65.59   |   68.18   |
+| IndoGPT $^\dagger$                                                              |  117M   |   74.49   |   70.34   |   72.46   |
 | *Our work*                                                                      |
 | [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   | **75.29** | **71.23** | **73.30** |
 
@@ -108,7 +108,41 @@ This growing list of ideas stem from a fruitful discussion [here](https://github
   <img src="https://raw.githubusercontent.com/LazarusNLP/IndoT5/main/assets/training_loss.png"/>
 </details>
 
-<!-- TODO: ## Fine-tune T5 -->
+## Fine-tune T5
+
+NanoT5 supports fine-tuning to a downstream dataset like Super Natural-Instructions (SNI). However, since this requires further customization of fine-tuning code to other downstream datasets, we opted to develop our own fine-tuning script based on Hugging Face's [sample fine-tuning code](https://github.com/huggingface/transformers/tree/main/examples/pytorch).
+
+In particular, we developed fine-tuning scripts for 3 IndoNLG tasks, namely: summarization, question-answering, and chit-chat (conversational), which you can find in [scripts](https://github.com/LazarusNLP/IndoT5/tree/main/scripts).
+
+### Summarization
+
+To fine-tune for summarization, run the following command and modify accordingly:
+
+```sh
+python scripts/run_summarization.py \
+    --model-checkpoint LazarusNLP/IndoNanoT5-base \ # pre-trained model checkpoint
+    --dataset-name LazarusNLP/indonlg \ # Hugging Face 🤗 dataset name
+    --dataset-config indosum \ # dataset config
+    --input-column-name input \ # input column (text passage) name in dataset
+    --target-column-name target \ # target column (summary) name in dataset
+    --input-max-length 512 \
+    --target-max-length 512 \
+    --num-beams 5 \ # beam width during beam search
+    --output-dir outputs/indo-nanot5-indosum \
+    --num-train-epochs 5 \
+    --optim adamw_torch_fused \ # any optimizer supported in Hugging Face 🤗 transformers
+    --learning-rate 1e-3 \
+    --weight-decay 0.01 \
+    --per-device-train-batch-size 8 \
+    --per-device-eval-batch-size 16 \
+    --hub-model-id LazarusNLP/IndoNanoT5-base-IndoSum # Hugging Face 🤗 Hub repo name
+```
+
+IndoNLG summarization recipes are provided [here](https://github.com/LazarusNLP/IndoT5/blob/main/run_summarization.sh).
+
+<!-- TODO: ### Question-Answering -->
+
+<!-- TODO: ### Chit-chat -->
 
 ## Acknowledgements
 
