@@ -18,7 +18,7 @@ This project focuses on pre-training a [T5](https://arxiv.org/abs/1910.10683) (T
 
 We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which consists of multiple downsteam generation tasks in Indonesian. The dataset also supports Javanese and Sundanese, but as our model is currently monolingual, we fine-tune on Indonesian tasks only.
 
-$^\dagger$IndoNLG baseline results are obtained from the [official IndoNLG paper](https://aclanthology.org/2021.emnlp-main.699/).
+> $^\dagger$ IndoNLG baseline results are obtained from the [official IndoNLG paper](https://aclanthology.org/2021.emnlp-main.699/).
 
 ### IndoSum
 
