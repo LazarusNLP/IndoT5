@@ -26,9 +26,9 @@ python scripts/run_summarization.py \
     --target-max-length 512 \
     --num-beams 5 \
     --output-dir outputs/indo-nanot5-liputan6-canonical \
-    --num-train-epochs 5 \
+    --num-train-epochs 50 \
     --optim adamw_torch_fused \
-    --learning-rate 1e-3 \
+    --learning-rate 1e-5 \
     --weight-decay 0.01 \
     --per-device-train-batch-size 8 \
     --per-device-eval-batch-size 16 \
@@ -44,9 +44,9 @@ python scripts/run_summarization.py \
     --target-max-length 512 \
     --num-beams 5 \
     --output-dir outputs/indo-nanot5-liputan6-extreme \
-    --num-train-epochs 5 \
+    --num-train-epochs 50 \
     --optim adamw_torch_fused \
-    --learning-rate 1e-3 \
+    --learning-rate 1e-5 \
     --weight-decay 0.01 \
     --per-device-train-batch-size 8 \
     --per-device-eval-batch-size 16 \

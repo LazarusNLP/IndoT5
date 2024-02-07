@@ -12,6 +12,7 @@ from transformers import (
     DataCollatorForSeq2Seq,
     Seq2SeqTrainingArguments,
     Seq2SeqTrainer,
+    EarlyStoppingCallback,
 )
 
 
@@ -27,8 +28,10 @@ class Args:
     num_beams: int = 5
     output_dir: str = "outputs/indo-nanot5-indosum"
     num_train_epochs: int = 5
+    early_stopping_patience: int = 5
+    early_stopping_threshold: float = 0.0
     optim: str = "adamw_torch_fused"
-    learning_rate: float = 1e-3
+    learning_rate: float = 1e-5
     weight_decay: float = 0.01
     per_device_train_batch_size: int = 8
     per_device_eval_batch_size: int = 16
@@ -73,6 +76,8 @@ def main(args: Args):
 
         return {k: round(v, 4) for k, v in result.items()}
 
+    callbacks = [EarlyStoppingCallback(args.early_stopping_patience, args.early_stopping_threshold)]
+
     training_args = Seq2SeqTrainingArguments(
         output_dir=args.output_dir,
         evaluation_strategy="epoch",
@@ -102,6 +107,7 @@ def main(args: Args):
         tokenizer=tokenizer,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
+        callbacks=callbacks,
     )
 
     trainer.train()
