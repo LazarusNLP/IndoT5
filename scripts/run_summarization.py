@@ -1,5 +1,6 @@
 # Modified from: https://github.com/huggingface/transformers/blob/main/examples/pytorch/summarization/run_summarization.py
 
+import json
 from dataclasses import dataclass
 from datargs import parse
 
@@ -36,6 +37,7 @@ class Args:
     per_device_train_batch_size: int = 8
     per_device_eval_batch_size: int = 16
     hub_model_id: str = "LazarusNLP/IndoNanoT5-base-IndoSum"
+    do_eval_only: bool = False
 
 
 def main(args: Args):
@@ -109,6 +111,14 @@ def main(args: Args):
         compute_metrics=compute_metrics,
         callbacks=callbacks,
     )
+
+    if args.do_eval_only:
+        results = trainer.evaluate(
+            tokenized_dataset["test"].select(range(10)), max_length=args.target_max_length, num_beams=args.num_beams
+        )
+        with open(f"{args.output_dir}/eval_results.json", "w") as f:
+            f.write(json.dumps(results))
+        return
 
     trainer.train()
 

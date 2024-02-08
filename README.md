@@ -22,35 +22,72 @@ This project focuses on pre-training a [T5](https://arxiv.org/abs/1910.10683) (T
 
 We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which consists of multiple downsteam generation tasks in Indonesian. The dataset also supports Javanese and Sundanese, but as our model is currently monolingual, we fine-tune on Indonesian tasks only.
 
-> $^\dagger$ IndoNLG baseline results are obtained from the [official IndoNLG paper](https://aclanthology.org/2021.emnlp-main.699/).
+> IndoNLG baseline results are obtained from the [official IndoNLG paper](https://aclanthology.org/2021.emnlp-main.699/).
 
 ### IndoSum
 
-| Model                                                                           | #params |    R1     |    R2     |    RL     |
+| Model                                                                           | #params |   R1 ↑    |   R2 ↑    |   RL ↑    |
 | ------------------------------------------------------------------------------- | :-----: | :-------: | :-------: | :-------: |
-| Scratch $^\dagger$                                                              |  132M   |   70.52   |   65.43   |   68.35   |
-| mBART Large $^\dagger$                                                          |  610M   |   74.65   |   70.43   |   72.54   |
-| mT5 Small $^\dagger$                                                            |  300M   |   74.04   |   69.64   |   71.89   |
-| IndoBART $^\dagger$                                                             |  132M   |   70.67   |   65.59   |   68.18   |
-| IndoGPT $^\dagger$                                                              |  117M   |   74.49   |   70.34   |   72.46   |
+| Scratch                                                                         |  132M   |   70.52   |   65.43   |   68.35   |
+| mBART Large                                                                     |  610M   |   74.65   |   70.43   |   72.54   |
+| mT5 Small                                                                       |  300M   |   74.04   |   69.64   |   71.89   |
+| IndoBART                                                                        |  132M   |   70.67   |   65.59   |   68.18   |
+| IndoGPT                                                                         |  117M   |   74.49   |   70.34   |   72.46   |
 | *Our work*                                                                      |
 | [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   | **75.29** | **71.23** | **73.30** |
 
-<!-- TODO: Liputan6 -->
+### Liputan6 Canonical
+
+| Model                                                                           | #params |   R1 ↑    |   R2 ↑    |   RL ↑    |
+| ------------------------------------------------------------------------------- | :-----: | :-------: | :-------: | :-------: |
+| Scratch                                                                         |  132M   |   38.14   |   20.67   |   31.85   |
+| See et al. (2017)                                                               |   22M   |   36.09   |   19.19   |   29.81   |
+| Koto et al. (2020)                                                              |  153M   | **41.06** | **22.83** | **34.23** |
+| mBART Large                                                                     |  610M   |   39.17   |   21.75   |   32.85   |
+| mT5 Small                                                                       |  300M   |   39.69   |   22.03   |   33.28   |
+| IndoBART                                                                        |  132M   |   39.87   |   22.24   |   33.50   |
+| IndoGPT                                                                         |  117M   |   37.41   |   20.61   |   31.54   |
+| *Our work*                                                                      |
+| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   39.76   |   22.29   |   33.46   |
+
+### Liputan6 Extreme
+
+| Model                                                                           | #params |   R1 ↑    |   R2 ↑    |   RL ↑    |
+| ------------------------------------------------------------------------------- | :-----: | :-------: | :-------: | :-------: |
+| Scratch                                                                         |  132M   |   32.47   |   13.45   |   25.52   |
+| See et al. (2017)                                                               |   22M   |   30.39   |   12.03   |   23.55   |
+| Koto et al. (2020)                                                              |  153M   | **34.84** | **15.03** | **27.44** |
+| mBART Large                                                                     |  610M   |   32.87   |   13.79   |   25.91   |
+| mT5 Small                                                                       |  300M   |   33.37   |   14.01   |   26.21   |
+| IndoBART                                                                        |  132M   |   33.58   |   14.45   |   26.68   |
+| IndoGPT                                                                         |  117M   |   31.45   |   13.09   |   24.91   |
+| *Our work*                                                                      |
+| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   33.23   |   14.17   |   26.21   |
 
 ### TyDiQA
 
-| Model                                                                           | #params |    EM     |    F1     |
+| Model                                                                           | #params |   EM ↑    |   F1 ↑    |
 | ------------------------------------------------------------------------------- | :-----: | :-------: | :-------: |
-| Scratch $^\dagger$                                                              |  132M   |   21.40   |   29.77   |
-| mBART Large $^\dagger$                                                          |  610M   | **62.69** | **76.41** |
-| mT5 Small $^\dagger$                                                            |  300M   |   35.67   |   51.90   |
-| IndoBART $^\dagger$                                                             |  132M   |   57.31   |   69.59   |
-| IndoGPT $^\dagger$                                                              |  117M   |   50.18   |   63.97   |
+| Scratch                                                                         |  132M   |   21.40   |   29.77   |
+| mBART Large                                                                     |  610M   | **62.69** | **76.41** |
+| mT5 Small                                                                       |  300M   |   35.67   |   51.90   |
+| IndoBART                                                                        |  132M   |   57.31   |   69.59   |
+| IndoGPT                                                                         |  117M   |   50.18   |   63.97   |
 | *Our work*                                                                      |
 | [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   58.94   |   72.19   |
 
-<!-- TODO: XPersona -->
+<!-- ### XPersona
+
+| Model                                                                           | #params | SacreBLEU ↑ | BLEU ↑ |
+| ------------------------------------------------------------------------------- | :-----: | :---------: | :----: |
+| Scratch                                                                         |  132M   |    1.86     |  1.86  |
+| CausalBERT                                                                      |  110M   |    2.24     |  2.23  |
+| mBART Large                                                                     |  610M   |    2.57     |  2.56  |
+| mT5 Small                                                                       |  300M   |    1.90     |  1.89  |
+| IndoBART                                                                        |  132M   |    2.93     |  2.93  |
+| IndoGPT                                                                         |  117M   |    2.02     |  2.02  |
+| *Our work*                                                                      |
+| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |             |        | -->
 
 ## Installation
 

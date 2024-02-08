@@ -34,8 +34,9 @@ python scripts/run_summarization.py \
     --per-device-eval-batch-size 16 \
     --hub-model-id LazarusNLP/IndoNanoT5-base-Liputan6-Canonical
 
+# eval Canonical model on Extreme test set
 python scripts/run_summarization.py \
-    --model-checkpoint LazarusNLP/IndoNanoT5-base \
+    --model-checkpoint LazarusNLP/IndoNanoT5-base-Liputan6-Canonical \
     --dataset-name LazarusNLP/indonlg \
     --dataset-config liputan6_extreme \
     --input-column-name input \
@@ -44,10 +45,6 @@ python scripts/run_summarization.py \
     --target-max-length 512 \
     --num-beams 5 \
     --output-dir outputs/indo-nanot5-liputan6-extreme \
-    --num-train-epochs 50 \
-    --optim adamw_torch_fused \
-    --learning-rate 1e-5 \
-    --weight-decay 0.01 \
-    --per-device-train-batch-size 8 \
     --per-device-eval-batch-size 16 \
+    --do-eval-only \
     --hub-model-id LazarusNLP/IndoNanoT5-base-Liputan6-Extreme
