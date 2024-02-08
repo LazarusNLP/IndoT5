@@ -1,0 +1,21 @@
+python scripts/run_chitchat.py \
+    --model-checkpoint LazarusNLP/IndoNanoT5-base \
+    --dataset-name LazarusNLP/indonlg \
+    --dataset-config xpersona \
+    --context-column-name context \
+    --input-column-name input \
+    --target-column-name target \
+    --use-persona \
+    --input-max-length 512 \
+    --target-max-length 512 \
+    --num-beams 5 \
+    --output-dir outputs/indo-nanot5-xpersona \
+    --num-train-epochs 50 \
+    --early-stopping-patience 5 \
+    --early-stopping-threshold 0.0 \
+    --optim adamw_torch_fused \
+    --learning-rate 1e-5 \
+    --weight-decay 0.01 \
+    --per-device-train-batch-size 8 \
+    --per-device-eval-batch-size 16 \
+    --hub-model-id LazarusNLP/IndoNanoT5-base-XPersona
