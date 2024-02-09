@@ -94,6 +94,7 @@ We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which c
 ```sh
 git clone https://github.com/LazarusNLP/IndoT5.git
 cd IndoT5
+git submodule update --init # clone nanoT5 submodule
 pip install -r requirements.txt
 pip install -r nanoT5/requirements.txt
 ```
