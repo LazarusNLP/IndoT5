@@ -76,18 +76,20 @@ We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which c
 | *Our work*                                                                      |
 | [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   58.94   |   72.19   |
 
-<!-- ### XPersona
+### XPersona
 
-| Model                                                                           | #params | SacreBLEU ↑ | BLEU ↑ |
-| ------------------------------------------------------------------------------- | :-----: | :---------: | :----: |
-| Scratch                                                                         |  132M   |    1.86     |  1.86  |
-| CausalBERT                                                                      |  110M   |    2.24     |  2.23  |
-| mBART Large                                                                     |  610M   |    2.57     |  2.56  |
-| mT5 Small                                                                       |  300M   |    1.90     |  1.89  |
-| IndoBART                                                                        |  132M   |    2.93     |  2.93  |
-| IndoGPT                                                                         |  117M   |    2.02     |  2.02  |
-| *Our work*                                                                      |
-| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |             |        | -->
+| Model                                                                           | #params | SacreBLEU ↑ |  BLEU ↑  |
+| ------------------------------------------------------------------------------- | :-----: | :---------: | :------: |
+| Scratch                                                                         |  132M   |    1.86     |   1.86   |
+| CausalBERT $^\dagger$                                                           |  110M   |    2.24     |   2.23   |
+| mBART Large                                                                     |  610M   |    2.57     |   2.56   |
+| mT5 Small                                                                       |  300M   |    1.90     |   1.89   |
+| IndoBART                                                                        |  132M   |    2.93     |   2.93   |
+| IndoGPT                                                                         |  117M   |    2.02     |   2.02   |
+| *Our work* $^\dagger$                                                           |
+| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |  **4.07**   | **4.07** |
+
+> $^\dagger$ Our models are trained with additional persona information, just like the original CausalBERT baseline. The remaining models are not trained with persona information. Our findings suggest that persona information is crucial for this task; serving a similar purpose to system prompts in recent LLM development.
 
 ## Installation
 
@@ -216,7 +218,31 @@ python scripts/run_qa.py \
 
 IndoNLG question-answering recipe is provided [here](https://github.com/LazarusNLP/IndoT5/blob/main/run_qa.sh).
 
-<!-- TODO: ### Chit-chat -->
+### Chit-chat
+
+To fine-tune for chit-chat, run the following command and modify accordingly:
+
+```sh
+python scripts/run_chitchat.py \
+    --model-checkpoint LazarusNLP/IndoNanoT5-base \
+    --dataset-name LazarusNLP/indonlg \
+    --dataset-config xpersona \
+    --context-column-name context \ # context/persona column name
+    --question-column-name input \ # conversation history/dialogues column name
+    --answer-column-name references \ # response column name
+    --use-persona \ # whether to use persona or not
+    --input-max-length 512 \
+    --target-max-length 512 \
+    --num-beams 5 \
+    --output-dir outputs/indo-nanot5-xpersona \
+    --num-train-epochs 50 \
+    --optim adamw_torch_fused \
+    --learning-rate 1e-5 \
+    --weight-decay 0.01 \
+    --per-device-train-batch-size 8 \
+    --per-device-eval-batch-size 16 \
+    --hub-model-id LazarusNLP/IndoNanoT5-base-XPersona
+```
 
 ## Acknowledgements
 
