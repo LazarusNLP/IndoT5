@@ -22,7 +22,7 @@ class Args:
     context_column_name: str = "context"
     input_column_name: str = "input"
     target_column_name: str = "target"
-    use_persona: bool = True
+    use_persona: bool = False
     input_max_length: int = 512
     target_max_length: int = 512
     num_beams: int = 5
