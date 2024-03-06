@@ -114,7 +114,7 @@ def main(args: Args):
 
     if args.do_eval_only:
         results = trainer.evaluate(
-            tokenized_dataset["test"].select(range(10)), max_length=args.target_max_length, num_beams=args.num_beams
+            tokenized_dataset["test"], max_length=args.target_max_length, num_beams=args.num_beams
         )
         with open(f"{args.output_dir}/eval_results.json", "w") as f:
             f.write(json.dumps(results))

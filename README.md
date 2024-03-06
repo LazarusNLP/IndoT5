@@ -62,7 +62,7 @@ We evaluate our models on [IndoNLG](https://github.com/IndoNLP/indonlg), which c
 | IndoBART                                                                        |  132M   |   33.58   |   14.45   |   26.68   |
 | IndoGPT                                                                         |  117M   |   31.45   |   13.09   |   24.91   |
 | *Our work*                                                                      |
-| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   33.23   |   14.17   |   26.21   |
+| [LazarusNLP/IndoNanoT5-base](https://huggingface.co/LazarusNLP/IndoNanoT5-base) |  248M   |   33.26   |   14.17   |   26.21   |
 
 ### TyDiQA
 
